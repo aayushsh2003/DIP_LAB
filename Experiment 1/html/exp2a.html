@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      -->
+<title>Experiment-1</title>
+<meta name="generator" content="MATLAB 24.2">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2025-01-23">
+<meta name="DC.source" content="exp2a.m">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="content">
+<pre class="codeinput">I = imread(<span class="string">'team1.jpg'</span>);
+J = rgb2gray(I);
+[r, c] = size(J);
+h = zeros(1, 256);
+<span class="keyword">for</span> i = 1:r
+<span class="keyword">for</span> j = 1:c
+t = J(i,j);
+h(t) = h(t)+1;
+<span class="keyword">end</span>
+<span class="keyword">end</span>
+disp(h);
+bar(h);
+subplot(2,2,1), imshow(I);
+title(<span class="string">'RGB image'</span>);
+subplot(2,2,2), imshow(J);
+title(<span class="string">'Gray image'</span>);
+subplot(2,2,3), imhist(J);
+title(<span class="string">'Histogram using imhist'</span>);
+subplot(2,2,4), bar(h, <span class="string">'b'</span>);
+title(<span class="string">'Histogram calculated'</span>);
+</pre>
+<pre class="codeoutput">  Columns 1 through 6
+
+           0           3           3          34         150         270
+
+  Columns 7 through 12
+
+         794        1022        1725        1635        2501        2210
+
+  Columns 13 through 18
+
+        2364        2274        2498        2564        3076        3744
+
+  Columns 19 through 24
+
+        3783        4323        4435        4714        4719        4165
+
+  Columns 25 through 30
+
+        4091        3681        3716        3335        3236        2767
+
+  Columns 31 through 36
+
+        2680        2422        2032        1857        1669        1523
+
+  Columns 37 through 42
+
+        1326        1289        1159        1077        1013         922
+
+  Columns 43 through 48
+
+         849         869         768         805         720         672
+
+  Columns 49 through 54
+
+         695         680         663         627         676         598
+
+  Columns 55 through 60
+
+         603         589         598         556         583         533
+
+  Columns 61 through 66
+
+         579         548         527         514         566         510
+
+  Columns 67 through 72
+
+         550         565         527         525         523         539
+
+  Columns 73 through 78
+
+         504         536         524         505         508         543
+
+  Columns 79 through 84
+
+         504         498         516         507         494         507
+
+  Columns 85 through 90
+
+         501         530         463         552         522         519
+
+  Columns 91 through 96
+
+         512         488         522         538         500         490
+
+  Columns 97 through 102
+
+         460         494         496         485         498         471
+
+  Columns 103 through 108
+
+         492         482         461         469         491         479
+
+  Columns 109 through 114
+
+         477         450         469         488         501         478
+
+  Columns 115 through 120
+
+         508         470         444         418         437         491
+
+  Columns 121 through 126
+
+         474         437         468         455         440         454
+
+  Columns 127 through 132
+
+         495         453         482         488         437         472
+
+  Columns 133 through 138
+
+         438         471         491         450         521         499
+
+  Columns 139 through 144
+
+         470         530         531         554         562         553
+
+  Columns 145 through 150
+
+         532         519         492         518         512         448
+
+  Columns 151 through 156
+
+         511         532         493         502         494         497
+
+  Columns 157 through 162
+
+         470         434         513         494         456         437
+
+  Columns 163 through 168
+
+         477         451         441         414         404         386
+
+  Columns 169 through 174
+
+         418         398         385         407         413         394
+
+  Columns 175 through 180
+
+         398         401         388         347         357         364
+
+  Columns 181 through 186
+
+         365         360         344         322         316         302
+
+  Columns 187 through 192
+
+         295         283         269         264         245         261
+
+  Columns 193 through 198
+
+         244         255         215         221         221         214
+
+  Columns 199 through 204
+
+         239         225         234         256         279         406
+
+  Columns 205 through 210
+
+         473         675        1143        4149      177619        2407
+
+  Columns 211 through 216
+
+        1519         745         391         310         231         189
+
+  Columns 217 through 222
+
+         161         142         107          93          62          55
+
+  Columns 223 through 228
+
+          50          26          15          14           9           2
+
+  Columns 229 through 234
+
+           2           2           1           0           0           0
+
+  Columns 235 through 240
+
+           1           0           0           0           0           0
+
+  Columns 241 through 246
+
+           0           0           0           0           0           0
+
+  Columns 247 through 252
+
+           0           0           0           0           0           0
+
+  Columns 253 through 256
+
+           0           0           0           0
+
+</pre>
+<img vspace="5" hspace="5" src="exp2a_01.png" alt=""> <p class="footer">
+<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2024b</a>
+<br>
+</p>
+</div>
+<!--
+##### SOURCE BEGIN #####
+I = imread('team1.jpg');
+J = rgb2gray(I);
+[r, c] = size(J);
+h = zeros(1, 256);
+for i = 1:r
+for j = 1:c
+t = J(i,j);
+h(t) = h(t)+1;
+end
+end
+disp(h);
+bar(h);
+subplot(2,2,1), imshow(I);
+title('RGB image');
+subplot(2,2,2), imshow(J);
+title('Gray image');
+subplot(2,2,3), imhist(J);
+title('Histogram using imhist');
+subplot(2,2,4), bar(h, 'b');
+title('Histogram calculated');
+##### SOURCE END #####
+-->
+</body>
+</html>

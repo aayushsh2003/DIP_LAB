@@ -1,0 +1,11 @@
+clc;
+u=imread('team1.jpg');
+imshow(u);
+Hm=fspecial('motion',20,45);
+MotionBlur=imfilter(u,Hm,'replicate');
+figure;
+imshow(MotionBlur);
+Hb=fspecial('disk',10);
+blurred=imfilter(u,Hb,'replicate');
+figure;
+imshow(blurred);

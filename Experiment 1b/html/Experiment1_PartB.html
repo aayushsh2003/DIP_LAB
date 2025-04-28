@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      -->
+<title>Experiment1_PartB</title>
+<meta name="generator" content="MATLAB 24.2">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2025-04-28">
+<meta name="DC.source" content="Experiment1_PartB.m">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="content">
+<pre class="codeinput">
+<span class="comment">% Read and convert image to grayscale</span>
+I = imread(<span class="string">'Cat.jpg'</span>);
+J = rgb2gray(I);
+[r, c] = size(J);           <span class="comment">% Get size of the grayscale image</span>
+s = r * c;                  <span class="comment">% Total number of pixels</span>
+
+<span class="comment">% Initialize histogram</span>
+h = zeros(1, 256);          <span class="comment">% Histogram of original image</span>
+z = zeros(1, 256);          <span class="comment">% Histogram of equalized image</span>
+
+<span class="comment">% Calculate histogram of the grayscale image</span>
+<span class="keyword">for</span> i = 1:r
+    <span class="keyword">for</span> j = 1:c
+        intensity = J(i, j);
+        h(intensity + 1) = h(intensity + 1) + 1; <span class="comment">% MATLAB indexing starts from 1</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">% Calculate PDF and CDF</span>
+pdf = h / s;
+cdf = cumsum(pdf);          <span class="comment">% CDF using built-in cumulative sum</span>
+new_intensity = round(cdf * 255);  <span class="comment">% Scale CDF to [0, 255]</span>
+
+<span class="comment">% Apply histogram equalization</span>
+b = zeros(r, c);  <span class="comment">% Initialize equalized image</span>
+<span class="keyword">for</span> i = 1:r
+    <span class="keyword">for</span> j = 1:c
+        original = J(i, j);
+        equalized = new_intensity(original + 1);
+        b(i, j) = equalized;
+        z(equalized + 1) = z(equalized + 1) + 1;  <span class="comment">% Update equalized histogram</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">% Convert b to uint8 for display</span>
+b = uint8(b);
+
+<span class="comment">% Display results</span>
+figure;
+subplot(2, 2, 1), imshow(J), title(<span class="string">'Original Grayscale Image'</span>);
+subplot(2, 2, 2), bar(h, <span class="string">'b'</span>), title(<span class="string">'Original Histogram'</span>), xlim([0 255]);
+subplot(2, 2, 3), imshow(b), title(<span class="string">'Histogram Equalized Image'</span>);
+subplot(2, 2, 4), bar(z, <span class="string">'b'</span>), title(<span class="string">'Equalized Histogram'</span>), xlim([0 255]);
+</pre>
+<img vspace="5" hspace="5" src="Experiment1_PartB_01.png" alt=""> <img vspace="5" hspace="5" src="Experiment1_PartB_02.png" alt=""> <p class="footer">
+<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2024b</a>
+<br>
+</p>
+</div>
+<!--
+##### SOURCE BEGIN #####
+% Read and convert image to grayscale
+I = imread('Cat.jpg');
+J = rgb2gray(I);
+[r, c] = size(J);           % Get size of the grayscale image
+s = r * c;                  % Total number of pixels
+
+% Initialize histogram
+h = zeros(1, 256);          % Histogram of original image
+z = zeros(1, 256);          % Histogram of equalized image
+
+% Calculate histogram of the grayscale image
+for i = 1:r
+    for j = 1:c
+        intensity = J(i, j);
+        h(intensity + 1) = h(intensity + 1) + 1; % MATLAB indexing starts from 1
+    end
+end
+
+% Calculate PDF and CDF
+pdf = h / s;
+cdf = cumsum(pdf);          % CDF using built-in cumulative sum
+new_intensity = round(cdf * 255);  % Scale CDF to [0, 255]
+
+% Apply histogram equalization
+b = zeros(r, c);  % Initialize equalized image
+for i = 1:r
+    for j = 1:c
+        original = J(i, j);
+        equalized = new_intensity(original + 1);
+        b(i, j) = equalized;
+        z(equalized + 1) = z(equalized + 1) + 1;  % Update equalized histogram
+    end
+end
+
+% Convert b to uint8 for display
+b = uint8(b);
+
+% Display results
+figure;
+subplot(2, 2, 1), imshow(J), title('Original Grayscale Image');
+subplot(2, 2, 2), bar(h, 'b'), title('Original Histogram'), xlim([0 255]);
+subplot(2, 2, 3), imshow(b), title('Histogram Equalized Image');
+subplot(2, 2, 4), bar(z, 'b'), title('Equalized Histogram'), xlim([0 255]);
+
+##### SOURCE END #####
+-->
+</body>
+</html>
